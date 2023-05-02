@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -eu
+
+readonly ROOT_PATH="$(realpath "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/..")"
+
+docker \
+    run \
+        -it \
+        --rm \
+        -v $(pwd):/app \
+        -w /app \
+        --user "$(id -u)":"$(id -g)" \
+        php-code-coverage-issue-996 \
+        php \
+            vendor/bin/phpunit \
+                --coverage-html /app/var/phpunit/coverage/html \
+                tests
+
+echo ""
+echo "Open file://${ROOT_PATH}/var/phpunit/coverage/html/index.html in your browser."

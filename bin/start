@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -eu
+
+readonly ROOT_PATH="$(realpath "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/..")"
+
+docker build --file="${ROOT_PATH}"/docker/Dockerfile --tag php-code-coverage-issue-996 .
+"${ROOT_PATH}"/bin/composer install

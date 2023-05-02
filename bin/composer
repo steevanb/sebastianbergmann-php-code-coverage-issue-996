@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eu
+
+docker run -it --rm -v $(pwd):/app -w /app --user "$(id -u)":"$(id -g)" composer:2.5.5 composer "${@:-}"
